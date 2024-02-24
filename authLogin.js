@@ -9,7 +9,7 @@ const generateAccessToken = (id) => {
 	return jwt.sign(playold, secret, {expiresIn: "24h"})
 }
 class authLogin {
-	async registr(req, res, body) {
+	async registration(req, res, body) {
 		try {
 			const hashpassword = await bcrypt.hash(body.password, 7)
 			const check = await User.findOne({email: body.name})
@@ -45,11 +45,11 @@ class authLogin {
 						const token = generateAccessToken(user._id);
 						console.log(token);
 						if (token == undefined) {
-										// Handle error here if needed
+							console.log(token)
 						}
-							res.end(JSON.stringify({ token }));
+						
 						res.writeHead(200, { "Content-Type": "application/json" });
-					
+						res.end(JSON.stringify({ token }));
 						return;
 		} catch (error) {
 						console.error("Error:", error);
